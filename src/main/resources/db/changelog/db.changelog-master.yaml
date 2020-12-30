@@ -45,7 +45,12 @@ databaseChangeLog:
                     constraints:
                       primaryKey: True
                       primaryKeyName: client_pkey
-                    name: client_id;
+                    name: account_id
+                    type: uuid
+                - column:
+                    constraints:
+                      nullable: False
+                    name: client_id
                     type: uuid
                 - column:
                     constraints:

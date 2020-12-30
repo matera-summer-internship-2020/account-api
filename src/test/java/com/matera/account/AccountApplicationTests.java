@@ -1,10 +1,10 @@
-package com.matera.conta;
+package com.matera.account;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ContaApplicationTests {
+class AccountApplicationTests {
 
 	@Test
 	void contextLoads() {
