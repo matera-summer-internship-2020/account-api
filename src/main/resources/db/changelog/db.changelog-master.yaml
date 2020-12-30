@@ -1,1 +1,71 @@
 databaseChangeLog:
+  - changeSet:
+      id: creates and populates account_type table
+      author: francisco
+      changes:
+        - createTable:
+            tableName: account_type
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: True
+                    primaryKeyName: account_type_pkey
+                  name: account_type_id
+                  type: int
+              - column:
+                  name: account_type
+                  type: varchar(20)
+        - insert:
+             tableName: account_type
+             columns:
+               - column:
+                   name: account_type_id
+                   value: 1
+               - column:
+                   name: account_type
+                   value: "Checking_Account"
+        - insert:
+            tableName: account_type
+            columns:
+              - column:
+                  name: account_type_id
+                  value: 2
+              - column:
+                  name: account_type
+                  value: "Savings_Account"
+
+  - changeSet:
+        id: creates account table
+        author: francisco
+        changes:
+          - createTable:
+              tableName: account
+              columns:
+                - column:
+                    constraints:
+                      primaryKey: True
+                      primaryKeyName: client_pkey
+                    name: client_id;
+                    type: uuid
+                - column:
+                    constraints:
+                      foreignKeyName: account_type_fkey
+                      references: account_type(account_type_id)
+                    name: account_type_id
+                    type: int
+                - column:
+                    constraints:
+                      nullable: False
+                    name: agency
+                    type: varchar(20)
+                - column:
+                    constraints:
+                      nullable: False
+                    name: account_number
+                    type: varchar(20)
+                - column:
+                    constraints:
+                      nullable: False
+                    name: balance
+                    type: numeric
+
