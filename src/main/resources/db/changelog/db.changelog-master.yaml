@@ -43,14 +43,12 @@ databaseChangeLog:
               columns:
                 - column:
                     constraints:
-                      nullable: False
                       primaryKey: True
                       primaryKeyName: client_pkey
                     name: client_id;
                     type: uuid
                 - column:
                     constraints:
-                      nullable: False
                       foreignKeyName: account_type_fkey
                       references: account_type(account_type_id)
                     name: account_type_id
