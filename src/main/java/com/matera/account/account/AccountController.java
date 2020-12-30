@@ -28,7 +28,7 @@ public class AccountController {
     @GetMapping("/clients/{clientId}/accounts/{accountId}")
     // Find Account by accountId
     public Account getAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId) {
-        return accountService.findAccountByAccountId(clientId, accountId); //fix
+        return accountService.findAccountByAccountId(clientId, accountId); 
     }
 
     @PostMapping("/client/{clientId}/accounts")
