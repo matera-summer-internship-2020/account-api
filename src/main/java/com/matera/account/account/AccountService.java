@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
@@ -33,7 +32,7 @@ public class AccountService {
 
     public Optional<Account> updateAccountByAccountId(UUID clientId, UUID accountId, AccountDTO accountDTO) {
         Optional<Account> account = findAccountByAccountId(clientId, accountId);
-            if (account.isPresent()) {
+        if (account.isPresent()) {
             account.get().setAccountNumber(accountDTO.getAccountNumber());
             account.get().setAccountTypeId(accountDTO.getAccountTypeId());
             account.get().setAgency(accountDTO.getAgency());

@@ -12,10 +12,10 @@ import java.util.UUID;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-    public List<Account> findAllByClientId(UUID clientId);
+    List<Account> findAllByClientId(UUID clientId);
 
     @Query("SELECT acct FROM Account acct WHERE acct.accountId = :accountId AND acct.clientId = :clientId")
-    public Optional<Account> findByAccountIdAndClientId(@Param("clientId") UUID clientId, @Param("accountId") UUID accountId);
+    Optional<Account> findByAccountIdAndClientId(@Param("clientId") UUID clientId, @Param("accountId") UUID accountId);
 
 
 }
