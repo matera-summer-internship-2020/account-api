@@ -5,18 +5,17 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 public class AccountController {
 
-    @Autowired
-    private AccountService accountService;
+    private final AccountService accountService;
 
-    @GetMapping
-    // List all Accounts
-    public List<Account> getAll() {
-        return accountService.findAll();
+    @Autowired
+    public AccountController(AccountService accountService) {
+        this.accountService = accountService;
     }
 
     @GetMapping("/clients/{clientId}/accounts")
@@ -27,19 +26,19 @@ public class AccountController {
 
     @GetMapping("/clients/{clientId}/accounts/{accountId}")
     // Find Account by accountId
-    public Account getAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId) {
-        return accountService.findAccountByAccountId(clientId, accountId); //fix
+    public Optional<Account> getAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId) {
+        return accountService.findAccountByAccountId(clientId, accountId);
     }
 
-    @PostMapping("/client/{clientId}/accounts")
+    @PostMapping("/clients/{clientId}/accounts")
     // Create account for specific client
-    public Account insertAccount(@PathVariable("clientId") UUID clientId, @RequestBody @Valid AccountDTO account) {
+    public Account insertAccount(@PathVariable("clientId") UUID clientId, @RequestBody AccountDTO account) {
         return accountService.insertClientAccountByClientId(clientId, account);
     }
 
     @PutMapping("/clients/{clientId}/accounts/{accountId}")
     // Update Account properties by accountId
-    public Account putAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId,
+    public Optional<Account> putAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId,
                                          @RequestBody @Valid AccountDTO accountDTO) {
         return accountService.updateAccountByAccountId(clientId, accountId, accountDTO);
     }
@@ -49,4 +48,5 @@ public class AccountController {
     public void deleteAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId) {
         accountService.deleteAccountByAccountId(clientId, accountId);
     }
+
 }

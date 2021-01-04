@@ -24,22 +24,16 @@ public class Account implements AccountProjection{
     // Properties
 
     @Id
-    @Column(name = "ACCOUNT_ID")
     private UUID accountId;
 
-    @Column(name = "CLIENT_ID")
     private UUID clientId;
 
-    @Column(name = "ACCOUNT_TYPE_ID")
     private Integer accountTypeId;
 
-    @Column(name = "AGENCY")
     private String agency;
 
-    @Column(name = "ACCOUNT_NUMBER")
     private String accountNumber;
 
-    @Column(name = "BALANCE")
     private BigDecimal balance;
 
     // Methods

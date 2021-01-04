@@ -35,42 +35,59 @@ databaseChangeLog:
                   value: "Savings_Account"
 
   - changeSet:
-        id: creates account table
-        author: francisco
-        changes:
-          - createTable:
-              tableName: account
-              columns:
-                - column:
-                    constraints:
-                      primaryKey: True
-                      primaryKeyName: client_pkey
-                    name: account_id
-                    type: uuid
-                - column:
-                    constraints:
-                      nullable: False
-                    name: client_id
-                    type: uuid
-                - column:
-                    constraints:
-                      foreignKeyName: account_type_fkey
-                      references: account_type(account_type_id)
-                    name: account_type_id
-                    type: int
-                - column:
-                    constraints:
-                      nullable: False
-                    name: agency
-                    type: varchar(20)
-                - column:
-                    constraints:
-                      nullable: False
-                    name: account_number
-                    type: varchar(20)
-                - column:
-                    constraints:
-                      nullable: False
-                    name: balance
-                    type: numeric
+      id: creates account table
+      author: francisco
+      changes:
+        - createTable:
+            tableName: account
+            columns:
+              - column:
+                  constraints:
+                    primaryKey: True
+                    primaryKeyName: client_pkey
+                  name: client_id;
+                  type: uuid
+              - column:
+                  constraints:
+                    foreignKeyName: account_type_fkey
+                    references: account_type(account_type_id)
+                  name: account_type_id
+                  type: int
+              - column:
+                  constraints:
+                    nullable: False
+                  name: agency
+                  type: varchar(20)
+              - column:
+                  constraints:
+                    nullable: False
+                  name: account_number
+                  type: varchar(20)
+              - column:
+                  constraints:
+                    nullable: False
+                  name: balance
+                  type: numeric
+
+  - changeSet:
+      id: rename client_id; to account_id
+      author: francisco
+      changes:
+        - renameColumn:
+            newColumnName: account_id
+            oldColumnName: client_id;
+            tableName: account
+
+  - changeSet:
+      id: create client_id column
+      author: francisco
+      changes:
+        - addColumn:
+            tableName: account
+            columns:
+              - column:
+                  constraints:
+                    nullable: False
+                  name: client_id
+                  type: uuid
 
