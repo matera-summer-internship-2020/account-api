@@ -1,10 +1,11 @@
 package com.matera.account.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -21,8 +22,10 @@ public class AccountService {
         return accountRepository.findAllByClientId(clientId);
     }
 
-    public Optional<Account> findAccountByAccountId(UUID clientId, UUID accountId) {
-        return accountRepository.findByAccountIdAndClientId(clientId, accountId);
+    public Account findAccountByAccountId(UUID clientId, UUID accountId) {
+        return accountRepository.findByAccountIdAndClientId(clientId, accountId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't Found Account"));
+
     }
 
     public Account insertClientAccountByClientId(UUID clientId, AccountDTO account) {
@@ -30,23 +33,21 @@ public class AccountService {
     }
 
 
-    public Optional<Account> updateAccountByAccountId(UUID clientId, UUID accountId, AccountDTO accountDTO) {
-        Optional<Account> account = findAccountByAccountId(clientId, accountId);
-        if (account.isPresent()) {
-            account.get().setAccountNumber(accountDTO.getAccountNumber());
-            account.get().setAccountTypeId(accountDTO.getAccountTypeId());
-            account.get().setAgency(accountDTO.getAgency());
-            account.get().setBalance(accountDTO.getBalance());
-            account.get().setClientId(accountDTO.getClientId());
-            accountRepository.save(account.get());
-        }
+    public Account updateAccountByAccountId(UUID clientId, UUID accountId, AccountDTO accountDTO) {
+        Account account = accountRepository.findByAccountIdAndClientId(clientId, accountId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't Found Account"));
+        account.setAccountNumber(accountDTO.getAccountNumber());
+        account.setAccountTypeId(accountDTO.getAccountTypeId());
+        account.setAgency(accountDTO.getAgency());
+        account.setBalance(accountDTO.getBalance());
+        account.setClientId(accountDTO.getClientId());
+        accountRepository.save(account);
         return account;
     }
 
     public void deleteAccountByAccountId(UUID clientId, UUID accountId) {
-        Optional<Account> account = findAccountByAccountId(clientId, accountId);
-        if (account.isPresent())
-            accountRepository.delete(account.get());
+        accountRepository.delete(accountRepository.findByAccountIdAndClientId(clientId, accountId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't Found Account")));
 
     }
 

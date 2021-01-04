@@ -3,9 +3,7 @@ package com.matera.account.account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,7 +24,8 @@ public class AccountController {
 
     @GetMapping("/clients/{clientId}/accounts/{accountId}")
     // Find Account by accountId
-    public Optional<Account> getAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId) {
+
+    public Account getAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId) {
         return accountService.findAccountByAccountId(clientId, accountId);
     }
 
@@ -38,8 +37,8 @@ public class AccountController {
 
     @PutMapping("/clients/{clientId}/accounts/{accountId}")
     // Update Account properties by accountId
-    public Optional<Account> putAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId,
-                                         @RequestBody @Valid AccountDTO accountDTO) {
+    public Account putAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId,
+                                         @RequestBody AccountDTO accountDTO) {
         return accountService.updateAccountByAccountId(clientId, accountId, accountDTO);
     }
 
