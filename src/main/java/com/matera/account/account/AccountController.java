@@ -36,14 +36,14 @@ public class AccountController {
     }
 
     @PutMapping("/clients/{clientId}/accounts/{accountId}")
-    // Update Account properties by accountId
+    // Update all Account properties by accountId
     public Account putAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId,
                                          @RequestBody AccountDTO accountDTO) {
         return accountService.updateAccountByAccountId(clientId, accountId, accountDTO);
     }
 
     @PatchMapping("/clients/{clientId}/accounts/{accountId}")
-    // Update Account properties by accountId
+    // Update Account properties fields by accountId
     public Account patchAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId,
                                          @RequestBody AccountDTO accountDTO) {
         return accountService.patchAccountByAccountId(clientId, accountId, accountDTO);
