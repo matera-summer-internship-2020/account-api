@@ -42,6 +42,13 @@ public class AccountController {
         return accountService.updateAccountByAccountId(clientId, accountId, accountDTO);
     }
 
+    @PatchMapping("/clients/{clientId}/accounts/{accountId}")
+    // Update Account properties by accountId
+    public Account patchAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId,
+                                         @RequestBody AccountDTO accountDTO) {
+        return accountService.patchAccountByAccountId(clientId, accountId, accountDTO);
+    }
+
     @DeleteMapping("/clients/{clientId}/accounts/{accountId}")
     // Delete Account by accountId
     public void deleteAccountByAccountId(@PathVariable("clientId") UUID clientId, @PathVariable("accountId") UUID accountId) {
