@@ -40,7 +40,6 @@ public class AccountService {
         account.setAccountTypeId(accountDTO.getAccountTypeId());
         account.setAgency(accountDTO.getAgency());
         account.setBalance(accountDTO.getBalance());
-        account.setClientId(accountDTO.getClientId());
         accountRepository.save(account);
         return account;
     }

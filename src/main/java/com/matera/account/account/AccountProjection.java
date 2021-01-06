@@ -1,5 +1,7 @@
 package com.matera.account.account;
 
+import com.matera.account.accounttype.AccountType;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -9,7 +11,7 @@ public interface AccountProjection {
 
     UUID getClientId();
 
-    Integer getAccountTypeId();
+    AccountType getAccountTypeId();
 
     String getAgency();
 

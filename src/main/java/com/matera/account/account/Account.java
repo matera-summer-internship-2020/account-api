@@ -1,5 +1,7 @@
 package com.matera.account.account;
 
+import com.matera.account.accounttype.AccountType;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 import javax.persistence.*;
@@ -28,7 +30,9 @@ public class Account implements AccountProjection{
 
     private UUID clientId;
 
-    private Integer accountTypeId;
+    @ManyToOne
+    @JoinColumn(name = "account_type_id")
+    private AccountType accountTypeId;
 
     private String agency;
 
@@ -64,11 +68,11 @@ public class Account implements AccountProjection{
     }
 
     @Override
-    public Integer getAccountTypeId() {
+    public AccountType getAccountTypeId() {
         return accountTypeId;
     }
 
-    public void setAccountTypeId(Integer accountTypeId) {
+    public void setAccountTypeId(AccountType accountTypeId) {
         this.accountTypeId = accountTypeId;
     }
 
