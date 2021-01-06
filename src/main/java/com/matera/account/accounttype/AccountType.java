@@ -1,6 +1,7 @@
 package com.matera.account.accounttype;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class AccountType {

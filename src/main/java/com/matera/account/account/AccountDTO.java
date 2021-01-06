@@ -2,6 +2,7 @@ package com.matera.account.account;
 
 import com.matera.account.accounttype.AccountType;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -13,7 +14,8 @@ public class AccountDTO implements AccountProjection{
 
     private UUID clientId;
 
-    private AccountType accountTypeId;
+    @NotNull
+    private AccountType accountType;
 
     private String agency;
 
@@ -32,8 +34,8 @@ public class AccountDTO implements AccountProjection{
     }
 
     @Override
-    public AccountType getAccountTypeId() {
-        return accountTypeId;
+    public AccountType getAccountType() {
+        return accountType;
     }
 
     @Override

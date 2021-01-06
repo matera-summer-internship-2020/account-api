@@ -11,7 +11,7 @@ public interface AccountProjection {
 
     UUID getClientId();
 
-    AccountType getAccountTypeId();
+    AccountType getAccountType();
 
     String getAgency();
 

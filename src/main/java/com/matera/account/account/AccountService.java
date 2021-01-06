@@ -37,7 +37,7 @@ public class AccountService {
         Account account = accountRepository.findByAccountIdAndClientId(clientId, accountId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't Found Account"));
         account.setAccountNumber(accountDTO.getAccountNumber());
-        account.setAccountTypeId(accountDTO.getAccountTypeId());
+        account.setAccountType(accountDTO.getAccountType());
         account.setAgency(accountDTO.getAgency());
         account.setBalance(accountDTO.getBalance());
         accountRepository.save(account);
