@@ -57,8 +57,7 @@ public class AccountService {
             account.get().setAgency(accountDTO.getAgency());
         if (accountDTO.getBalance() != null)
             account.get().setBalance(accountDTO.getBalance());
-        accountRepository.save(account.get());
-        return account.get();
+        return accountRepository.save(account.get());
     }
 
     public void deleteAccountByAccountId(UUID clientId, UUID accountId) {
