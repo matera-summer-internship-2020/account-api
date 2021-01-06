@@ -1,8 +1,11 @@
 package com.matera.account.account;
 
+import com.matera.account.accounttype.AccountType;
+
 import java.math.BigDecimal;
 import java.util.UUID;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Account implements AccountProjection{
@@ -14,7 +17,7 @@ public class Account implements AccountProjection{
     public Account(UUID clientId, AccountDTO accountDTO) {
         this.accountId = accountDTO.getAccountId();
         this.clientId = clientId;
-        this.accountTypeId = accountDTO.getAccountTypeId();
+        this.accountType = accountDTO.getAccountType();
         this.agency = accountDTO.getAgency();
         this.accountNumber = accountDTO.getAccountNumber();
         this.balance = accountDTO.getBalance();
@@ -28,7 +31,9 @@ public class Account implements AccountProjection{
 
     private UUID clientId;
 
-    private Integer accountTypeId;
+    @ManyToOne
+    @JoinColumn(name = "account_type_id")
+    private AccountType accountType;
 
     private String agency;
 
@@ -64,12 +69,11 @@ public class Account implements AccountProjection{
     }
 
     @Override
-    public Integer getAccountTypeId() {
-        return accountTypeId;
+    public AccountType getAccountType() {
+        return accountType;
     }
 
-    public void setAccountTypeId(Integer accountTypeId) {
-        this.accountTypeId = accountTypeId;
+    public void setAccountType(AccountType accountType) {
     }
 
     @Override

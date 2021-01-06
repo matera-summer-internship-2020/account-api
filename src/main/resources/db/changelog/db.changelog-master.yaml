@@ -91,3 +91,11 @@ databaseChangeLog:
                   name: client_id
                   type: uuid
 
+
+  - changeSet:
+      id: change account_type constraint nullable to false in account table
+      author: izumizawa
+      changes:
+        - addNotNullConstraint:
+            tableName: account
+            columnName: account_type_id
