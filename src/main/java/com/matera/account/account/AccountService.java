@@ -1,5 +1,7 @@
 package com.matera.account.account;
 
+import com.matera.account.accounttype.AccountType;
+import com.matera.account.accounttype.AccountTypeRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,9 +17,12 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
 
+    private final AccountTypeRepository accountTypeRepository;
+
     @Autowired
-    public AccountService(AccountRepository accountRepository) {
+    public AccountService(AccountRepository accountRepository, AccountTypeRepository accountTypeRepository) {
         this.accountRepository = accountRepository;
+        this.accountTypeRepository = accountTypeRepository;
     }
 
     public List<Account> findClientAccountsByClientId(UUID clientId) {
@@ -52,7 +57,11 @@ public class AccountService {
         if (StringUtils.isNotBlank(accountDTO.getAccountNumber()))
             account.get().setAccountNumber(accountDTO.getAccountNumber());
         if (accountDTO.getAccountType() != null)
-            account.get().setAccountType(accountDTO.getAccountType());
+        {
+            AccountType accT = accountTypeRepository.findById(accountDTO.getAccountType().getAccountTypeId())
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid Account Type Id"));
+            account.get().setAccountType(accT);
+        }
         if (StringUtils.isNotBlank(accountDTO.getAgency()))
             account.get().setAgency(accountDTO.getAgency());
         if (accountDTO.getBalance() != null)

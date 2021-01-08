@@ -74,6 +74,7 @@ public class Account implements AccountProjection{
     }
 
     public void setAccountType(AccountType accountType) {
+        this.accountType = accountType;
     }
 
     @Override
