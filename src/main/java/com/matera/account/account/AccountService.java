@@ -51,8 +51,8 @@ public class AccountService {
         account.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Couldn't Found Account"));
         if (StringUtils.isNotBlank(accountDTO.getAccountNumber()))
             account.get().setAccountNumber(accountDTO.getAccountNumber());
-        if (accountDTO.getAccountTypeId() != null)
-            account.get().setAccountTypeId(accountDTO.getAccountTypeId());
+        if (accountDTO.getAccountType() != null)
+            account.get().setAccountType(accountDTO.getAccountType());
         if (StringUtils.isNotBlank(accountDTO.getAgency()))
             account.get().setAgency(accountDTO.getAgency());
         if (accountDTO.getBalance() != null)
