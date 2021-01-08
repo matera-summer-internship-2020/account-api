@@ -91,7 +91,6 @@ databaseChangeLog:
                   name: client_id
                   type: uuid
 
-
   - changeSet:
       id: change account_type constraint nullable to false in account table
       author: izumizawa

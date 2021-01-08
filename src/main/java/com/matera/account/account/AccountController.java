@@ -1,9 +1,9 @@
 package com.matera.account.account;
 
+import com.matera.account.dto.ClientAccountsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -18,7 +18,7 @@ public class AccountController {
 
     @GetMapping("/clients/{clientId}/accounts")
     // List all Accounts for a specific client
-    public List<Account> getAccountsByClientId(@PathVariable("clientId") UUID clientId) {
+    public ClientAccountsResponse getAccountsByClientId(@PathVariable("clientId") UUID clientId) {
         return accountService.findClientAccountsByClientId(clientId);
     }
 
