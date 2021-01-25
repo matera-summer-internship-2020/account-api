@@ -14,7 +14,7 @@ public class Transfer {
     private String agencyReceiver;
     private String accountNumberReceiver;
     private BigDecimal value;
-    private Calendar transferDate;
+    private String transferDate;
 
     // Constructor's
 
@@ -33,11 +33,11 @@ public class Transfer {
         this.value = value;
     }
 
-    public Calendar getTransferDate() {
+    public String getTransferDate() {
         return transferDate;
     }
 
-    public void setTransferDate(Calendar transferDate) {
+    public void setTransferDate(String transferDate) {
         this.transferDate = transferDate;
     }
 

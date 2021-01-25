@@ -30,7 +30,11 @@ public class TransferService {
         if (account_sent.getBalance().compareTo(transfer.getValue()) >= 0) {
             account_sent.setBalance(account_sent.getBalance().subtract(transfer.getValue()));
             account_receiver.setBalance(account_receiver.getBalance().add(transfer.getValue()));
-            transfer.setTransferDate(Calendar.getInstance());
+            Calendar transactionDate = Calendar.getInstance();
+            String dateOutput = transactionDate.get(Calendar.DAY_OF_MONTH)+"/"+transactionDate.get(Calendar.MONTH)+"/"
+                    +transactionDate.get(Calendar.YEAR)+"-"+transactionDate.get(Calendar.HOUR_OF_DAY)+":"+transactionDate
+                    .get(Calendar.MINUTE);
+            transfer.setTransferDate(dateOutput);
             transfer.setAgencySent(account_sent.getAgency());
             transfer.setAccountNumberSent(account_sent.getAccountNumber());
             transfer.setAgencyReceiver(account_receiver.getAgency());
