@@ -16,6 +16,12 @@ public class AccountController {
         this.accountService = accountService;
     }
 
+    @GetMapping("/clients")
+    // List ALL clients
+    public List<Account> getAccountsByClientId() {
+        return accountService.findAll();
+    }
+
     @GetMapping("/clients/{clientId}/accounts")
     // List all Accounts for a specific client
     public List<Account> getAccountsByClientId(@PathVariable("clientId") UUID clientId) {

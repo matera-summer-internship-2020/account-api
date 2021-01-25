@@ -25,6 +25,10 @@ public class AccountService {
         this.accountTypeRepository = accountTypeRepository;
     }
 
+    public List<Account> findAll() {
+        return accountRepository.findAll();
+    }
+
     public List<Account> findClientAccountsByClientId(UUID clientId) {
         return accountRepository.findAllByClientId(clientId);
     }
