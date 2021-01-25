@@ -3,11 +3,15 @@ package com.matera.account.transfer;
 import com.matera.account.account.Account;
 import com.matera.account.account.AccountRepository;
 import com.matera.account.account.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +21,7 @@ public class TransferService {
     private final AccountService accountService;
     private final AccountRepository accountRepository;
 
+    @Autowired
     public TransferService(AccountService accountService, AccountRepository accountRepository){
         this.accountService = accountService;
         this.accountRepository = accountRepository;
@@ -30,11 +35,10 @@ public class TransferService {
         if (account_sent.getBalance().compareTo(transfer.getValue()) >= 0) {
             account_sent.setBalance(account_sent.getBalance().subtract(transfer.getValue()));
             account_receiver.setBalance(account_receiver.getBalance().add(transfer.getValue()));
-            Calendar transactionDate = Calendar.getInstance();
-            String dateOutput = transactionDate.get(Calendar.DAY_OF_MONTH)+"/"+transactionDate.get(Calendar.MONTH)+"/"
-                    +transactionDate.get(Calendar.YEAR)+"-"+transactionDate.get(Calendar.HOUR_OF_DAY)+":"+transactionDate
-                    .get(Calendar.MINUTE);
-            transfer.setTransferDate(dateOutput);
+            String pattern = "dd-MM-yyyy - HH:mm";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(new Date());
+            transfer.setTransferDate(date);
             transfer.setAgencySent(account_sent.getAgency());
             transfer.setAccountNumberSent(account_sent.getAccountNumber());
             transfer.setAgencyReceiver(account_receiver.getAgency());
